@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>贪吃蛇</title>
+</head>
+<style>
+	*{
+		padding:0;
+		margin:0;
+		list-style: none;
+	}
+	body{
+		font-family: "苹方";
+		font-size: 16px;
+		color:white;
+		overflow: hidden;
+		background-image: url(5.png);
+	}
+	.sceen{
+		width:600px;
+		height:600px;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		bottom:0;
+		top:30px;
+		/*border:1px solid black;*/
+		border-right:0;
+		border-bottom: 0;
+		background:#C8E9E8;
+		box-shadow: 3px 3px 3px 3px #1C8C83,-3px -3px 3px 3px #1C8C83;
+	}
+	.black{
+		width:29px;
+		height:29px;
+		margin-bottom: 1px;
+		margin-right: 1px;
+		float: left;
+		background:#4FB5AA;
+	}
+	.she{
+		background-image: url(1.png);
+	}
+	.shiwu{
+		padding:2px solid block;
+		box-sizing:border-box;
+		background:#FF9200;
+	}
+	.gongneng{
+		width:200px;
+		height:300px;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		padding:30px 30px;
+		box-sizing:border-box;
+		text-align: center;
+		display: none;
+	}
+	.button{
+		padding:10px 50px;
+		margin:20px auto;
+		background: #388328;
+	    color: #fff;
+	    font-family: "微软雅黑";
+	    font-weight: bolder;
+	    font-size: 20px;
+	    border-radius: 10px;
+	    box-shadow: 3px 3px 6px #29611e;
+	    outline: none;
+	}
+	.button:hover{
+		color:#26ff66;
+		background:#214E18;
+	}
+	#fh,#fan{
+		background:#D93026;
+	}
+	.hang{
+		width:140px;
+		height:20px;
+		border:0;
+		border-bottom: 1px solid black;
+		outline: none;
+		text-align: center;
+	}
+	.hang:hover{
+		height:40px;
+		font-size: 20px;
+	}
+	.jiemian{
+		width:600px;
+		height:600px;
+		background:black;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:30px;
+		bottom:0;
+		text-align: center;
+		z-index: 30;
+		background:url(2.png);
+	}
+	.jm{
+		width:200px;
+		height:200px;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		bottom:60px;
+	}
+	.jiemian ul{
+		margin:300px 0 0 0;
+	}
+	.kai{
+		height:50px;
+		cursor: pointer;
+	}
+	.jies{
+		width:600px;
+		height:600px;
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:30px;
+		bottom:0;
+		background:rgba(0,0,0,0.3);
+		font-size: 80px;
+		color:black;
+		text-align: center;
+		line-height: 600px;
+		display:none;
+		z-index: 60;
+	}
+	.chong{
+	    font-family: "微软雅黑";
+	    border-radius: 8px;
+	    outline: none;
+		padding:5px 20px;
+		background: #D93026;
+	    color: #fff;
+	    font-weight: bolder;
+	    font-size:12px;
+	    outline: none;
+	    float:left;
+	}
+	.chong:hover{
+		color:#26ff66;
+		background:#214E18;
+	}
+	.fanhui{
+		padding:5px 20px;
+		background: #D93026;
+	    color: #fff;
+	    font-weight: bolder;
+	    font-family: "微软雅黑";
+	    font-size:12px;
+	    outline: none;
+	    float:right;
+	    border-radius: 8px;
+	}
+	.fanhui:hover{
+		color:#26ff66;
+		background:#214E18;
+	}
+	.zt{
+		padding:5px 20px;
+		background: #388328;
+	    color: #fff;
+	    font-weight: bolder;
+	    font-size:12px;
+	    outline: none;
+	    border-radius: 8px;
+	}
+	.zt:hover{
+		background:#D93026;
+	}
+	.zti{
+		background: #D93026;
+	}
+	.zti:hover{
+		background: #388328;
+	}
+	.kf{
+		position:absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:10px;
+		height:30px;
+		width:600px;
+		text-align:center;
+		display:none;
+	}
+</style>
+<body>
+	<div class="jiemian">
+		<div class="jm">
+			<input type="button" value="开始游戏" class="button" data-d="kai">
+			<input type="button" value="难度选择" class="button" data-d="xuan">
+			<input type="button" value="退出游戏" class="button" data-d="tui" id="fh">
+		</div>	
+	</div>
+	<div class="sceen"></div>
+	<div class="gongneng">
+		<input type="button" value="普通" class="button" data-row="20">	
+		<input type="button" value="困难" class="button" data-row="30">
+		<input type="button" value="返回" class="button" id="fan">		
+	</div>
+	<div class="jies">
+		
+	</div>
+	<div class="kf">
+		<input type="button" value="重新开始" class="chong">
+		<input type="button" value="暂停" class="zt">
+		<input type="button" value="返回" class="fanhui">
+	</div>
+	
+</body>
+<script src = "js/jquery-1.12.0.js"></script>
+<script src = "js/tanchishe.js"></script>
+</html>
